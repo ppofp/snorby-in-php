@@ -1,165 +1,129 @@
-<div id="wrapper">
-	<div id="content" class="container_12">
-		<div id="title">
-		
-		
-		
-		<div class="grid_6" id="title-header">Dashboard</div>
-		<ul class="" id="title-menu-holder">
-			<ul id="title-menu">
-				<li>&nbsp;</li>
-				<li>
-					<a href="#" class="has_dropdown right-more" id="options"><img alt="Filter" height="16" src="/images/icons/filter.png" width="16" /> More Options</a>
-					<dl class="drop-down-menu" id="options" style="display:none;">
-						<dd><a href="/dashboard?range=last_week" class="dashboard">Last Week</a></dd>
-						<dd><a href="/dashboard?range=last_month" class="dashboard">Last Month</a></dd>
-						<dd><a href="/dashboard.pdf?range=year" class="dashboard">Export To PDF</a></dd>
-						<dd><a href="/force/cache" class="force-cache-update">Force Cache Update</a></dd>
-					</dl>
-				</li>
-				<li>&nbsp;</li>
-			</ul>
-		</ul>
-		
-		
-		
+<div class="container box-holder">
+	<div class="row">
+		<!-- high severity graph -->
+		<div class='span4 box'>
+				<div class='content shadow-in'>
+					<div class='data'>
+						
+						<div class='box-count'>
+							<?php echo array_sum($high); ?>
+						</div>
+						
+						<div class="box-title">
+							High Severity
+						</div>
+						
+						<div class='box-graph' id='sev1-graph'></div>
+						
+					</div>
+				</div>
+			
+				<div class='footer'>
+					<span><?php echo array_sum($high); ?> / <?php echo $event_count; ?></span> 
+				</div>
 		</div>
 		
-		<div id="dashboard">
-			<div class="main grid_9">
-				<div class="dashboard-menu">
-					<ul>
-						<li class=' <?php if($range == "last_24") echo "active "; ?> add_tipsy' title=""><a href="<?php echo site_url('/dashboard?range=last_24'); ?>">Last 24</a></li>		
-						<li class=' <?php if($range == "today") echo "active "; ?>add_tipsy' title="Saturday, January 19, 2013"><a href="<?php echo site_url('/dashboard?range=today');?>">Today</a></li>	
-						<li class=' <?php if($range == "yesterday") echo "active "; ?>add_tipsy' title="Friday, January 18, 2013"><a href="<?php echo site_url('/dashboard?range=yesterday');?>">Yesterday</a></li>
-						<li class=' <?php if($range == "week") echo "active "; ?>add_tipsy' title=""><a href="<?php echo site_url('/dashboard?range=week');?>">This Week</a></li>  
-						<li class=' <?php if($range == "month") echo "active "; ?>add_tipsy' title="January"><a href="<?php echo site_url('/dashboard?range=month');?>">This Month</a></li>		
-						<li class=' <?php if($range == "quarter") echo "active "; ?>add_tipsy' title=""><a href="<?php echo site_url('/dashboard?range=quarter');?>">This Quarter</a></li>
-						<li class=' <?php if($range == "year") echo "active "; ?>add_tipsy' title="2013"><a href="<?php echo site_url('/dashboard?range=year');?>">This Year</a></li>		
-						<li class='right last-cache-time'>
-						<i>Updated: </i>
-						</li>
-					</ul>
+		<!-- medium severity graph -->
+		<div class='span4 box'>
+				<div class='content shadow-in'>
+					<div class='data'>
+						
+						<div class='box-count'>
+							<?php echo array_sum($medium); ?>
+						</div>
+						
+						<div class="box-title">
+							Medium Severity
+						</div>
+						
+						<div class='box-graph' id='sev2-graph'></div>
+						
+					</div>
 				</div>
+			
+				<div class='footer'>
+					<span><?php echo array_sum($medium); ?> / <?php echo $event_count; ?></span> 
+				</div>
+		</div>
+		
+		<!-- low severity graph -->
+		<div class='span4 box'>
+				<div class='content shadow-in'>
+					<div class='data'>
+						
+						<div class='box-count'>
+							<?php echo array_sum($low); ?>
+						</div>
+						
+						<div class="box-title">
+							Low Severity
+						</div>
+						
+						<div class='box-graph' id='sev3-graph'></div>
+						
+					</div>
+				</div>
+			
+				<div class='footer'>
+					<span><?php echo array_sum($low); ?> / <?php echo $event_count; ?></span> 
+				</div>
+		</div>
+	</div>
+</div>
 				
-				<div id="box-holder">
+<div class="container">
+	<div class="tabbable">
+		<ul class="nav nav-tabs" id="graph_tab">
+			<li class="active"><a href="#show_events_graph" data-toggle="tab">Sensors</a></li>
+			<li><a href="#show_severities_graph" data-toggle="tab">Severities</a></li>
+			<li><a href="#show_protocol_graph" data-toggle="tab">Protocols</a></li>
+			<li><a href="#show_signature_graph" data-toggle="tab">Signatures</a></li>
+			<li><a href="#show_source_ips_graph" data-toggle="tab">Sources</a></li>
+			<li><a href="#show_destination_ips_graph" data-toggle="tab">Destinations</a></li>
 
-					
-					<!-- high severity graph -->
-					<div class='box grid_3 alpha shadow round'>
-	
-						<div class='content shadow-in'>
-							<div class='data'>
-								
-								<div id='box-count'>
-									<?php echo array_sum($high); ?>
-								</div>
-								
-								<div id="box-title">
-									High Severity
-								</div>
-								
-								<div class='box-graph' id='sev1-graph'></div>
-								
-							</div>
-						</div>
-					
-						<div class='footer'>
-							<span><?php echo array_sum($high); ?> / <?php echo $event_count; ?></span> 
-						</div>
-					</div>
-					
-					<!-- medium severity graph -->
-					<div class='box grid_3 alpha shadow round'>
-	
-						<div class='content shadow-in'>
-							<div class='data'>
-								
-								<div id='box-count'>
-									<?php echo array_sum($medium); ?>
-								</div>
-								
-								<div id="box-title">
-									Medium Severity
-								</div>
-								
-								<div class='box-graph' id='sev2-graph'></div>
-								
-							</div>
-						</div>
-					
-						<div class='footer'>
-							<span><?php echo array_sum($medium); ?> / <?php echo $event_count; ?></span> 
-						</div>
-					</div>
-					
-					<!-- low severity graph -->
-					<div class='box grid_3 alpha shadow round'>
-	
-						<div class='content shadow-in'>
-							<div class='data'>
-								
-								<div id='box-count'>
-									<?php echo array_sum($low); ?>
-								</div>
-								
-								<div id="box-title">
-									Low Severity
-								</div>
-								
-								<div class='box-graph' id='sev3-graph'></div>
-								
-							</div>
-						</div>
-					
-						<div class='footer'>
-							<span><?php echo array_sum($low); ?> / <?php echo $event_count; ?></span> 
-						</div>
-					</div>
-					
-				</div>
-				
+		</ul>
+		
+		<div class="tab-content line-chart">	
+			<div class="tab-pane active" id="show_events_graph">
+				<div id='events-graph'  style="width:87%"></div>
+			</div>
 
-				
-				<div id="box-tabs">
-					<ul id="box-menu">
-						<li class="active"><a href="#" class="show_events_graph">Sensors</a></li>
-						<li><a href="#" class="show_severities_graph">Severities</a></li>
-						<li><a href="#" class="show_protocol_graph">Protocols</a></li>
-						<li><a href="#" class="show_signature_graph">Signatures</a></li>
-						<li><a href="#" class="show_source_ips_graph">Sources</a></li>
-						<li><a href="#" class="show_destination_ips_graph">Destinations</a></li>
-					</ul>
-				</div>
-				
-				<div class="box-large round">
-					<div class='box-large-inside'>
-						<div id='events-graph' class='dashboard-graph'></div>
-						<div id='severity-graph' style='display:none;' class='dashboard-graph'></div>
-						<div id='protocol-graph' style='display:none;' class='dashboard-graph'></div>
-						<div id='signature-graph' style='display:none;' class='dashboard-graph'></div>
-						<div id='source-ips-graph' style='display:none;' class='dashboard-graph'></div>
-						<div id='destination-ips-graph' style='display:none;' class='dashboard-graph'></div>
-					</div>
-				</div>
+			<div class="tab-pane" id="show_severities_graph">
+				<div id='severity-graph'  style="width:60%"></div>
 			</div>
-			<div id="secondary">
+
+			<div class="tab-pane" id="show_protocol_graph">
+				<div id='protocol-graph' style="width:60%"></div>
 			</div>
+
+			<div class="tab-pane" id="show_signature_graph">
+				<div id='signature-graph' style="width:60%"></div>
+			</div>
+
+			<div class="tab-pane" id="show_source_ips_graph">
+				<div id='source-ips-graph' style="width:60%"></div>
+			</div>
+			
+			<div class="tab-pane" id="show_destination_ips_graph">
+				<div id='destination-ips-graph' style="width:60%"></div>
+			</div>		
 		</div>
 	</div>
 </div>
 
-<script type="text/javascript" src="/js/jquery.sparkline.js"></script>
-<script type="text/javascript" src="/js/highcharts.js"></script>
+<script type="text/javascript" src="<?php echo base_url('public/js/jquery.sparkline.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('public/js/highcharts.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('public/js/highcharts.exporting.js');?>"></script>
 <script type="text/javascript">
 var sev1_bg_color = '#eb0000';
 var sev2_bg_color = '#ffab2e';
 var sev3_bg_color = '#00ab00';
 
 //severity的三张柱状图
-$('#sev1-graph').sparkline([<?php echo implode($high, ",")?>],{barWidth: 6, height: 40, type: 'bar', barColor: sev1_bg_color} );
-$('#sev2-graph').sparkline([<?php echo implode($medium, ",")?>],{barWidth: 6, height: 40, type: 'bar', barColor: sev2_bg_color} );
-$('#sev3-graph').sparkline([<?php echo implode($low, ",")?>],{barWidth: 6, height: 40, type: 'bar', barColor: sev3_bg_color} );
+$('#sev1-graph').sparkline([<?php echo implode($high, ",")?>],{barWidth: 10, height: 100, type: 'bar', barColor: sev1_bg_color} );
+$('#sev2-graph').sparkline([<?php echo implode($medium, ",")?>],{barWidth: 10, height: 100, type: 'bar', barColor: sev2_bg_color} );
+$('#sev3-graph').sparkline([<?php echo implode($low, ",")?>],{barWidth: 10, height: 100, type: 'bar', barColor: sev3_bg_color} );
+
 
 //event graph
 chart = new Highcharts.Chart({
@@ -182,18 +146,11 @@ chart = new Highcharts.Chart({
 	categories: [<?php echo implode( ",",$axis); ?>],
 		title: {
 						margin: 10,
-						<?php if ($range == 'year' || $range == 'quarter'): ?>
-							text: 'Month of Year'
-						<?php elseif ($range == 'month' || $range == 'last_month'): ?>
-							text: 'Date of Month'
-						<?php elseif ($range == 'week' || $range == 'last_week'): ?>
-							text: 'Date Of Week'
-						<?php elseif ($range == 'last_24'): ?>
-							text: 'Last 24 Hours'
-						<?php else: ?>
-							text: 'Hour of Day'
-						<?php endif; ?>
-		 }
+						text: "<?php echo $axis_desp; ?>"
+		 },
+		 labels: {
+                staggerLines: 2
+            } 
 	  },
 	  yAxis: {
 		 title: {
@@ -251,18 +208,11 @@ chart = new Highcharts.Chart({
 	categories: [<?php echo implode(",", $axis); ?>],
 		title: {
 						margin: 10,
-						<?php if ($range == 'year' || $range == 'quarter'): ?>
-							text: 'Month of Year'
-						<?php elseif ($range == 'month' || $range == 'last_month'): ?>
-							text: 'Date of Month'
-						<?php elseif ($range == 'week' || $range == 'last_week'): ?>
-							text: 'Date Of Week'
-						<?php elseif ($range == 'last_24'): ?>
-							text: 'Last 24 Hours'
-						<?php else: ?>
-							text: 'Hour of Day'
-						<?php endif; ?>
-		 }
+						text: "<?php echo $axis_desp; ?>"
+		 },
+		 labels: {
+                staggerLines: 2
+            } 
 	  },
 	  yAxis: {
 		 title: {
@@ -304,7 +254,7 @@ chart = new Highcharts.Chart({
 				data: [<?php echo implode(',', $low);?>]
 			}]
    });
-   
+  
 //protocol graph
 chart = new Highcharts.Chart({
 	  chart: {
@@ -326,18 +276,11 @@ chart = new Highcharts.Chart({
 	categories: [<?php echo implode(",", $axis); ?>],
 		title: {
 						margin: 10,
-						<?php if ($range == 'year' || $range == 'quarter'): ?>
-							text: 'Month of Year'
-						<?php elseif ($range == 'month' || $range == 'last_month'): ?>
-							text: 'Date of Month'
-						<?php elseif ($range == 'week' || $range == 'last_week'): ?>
-							text: 'Date Of Week'
-						<?php elseif ($range == 'last_24'): ?>
-							text: 'Last 24 Hours'
-						<?php else: ?>
-							text: 'Hour of Day'
-						<?php endif; ?>
-		 }
+						text: "<?php echo $axis_desp; ?>"
+		 },
+		 labels: {
+                staggerLines: 2
+            } 
 	  },
 	  yAxis: {
 		 title: {
@@ -365,18 +308,13 @@ chart = new Highcharts.Chart({
 				 borderColor: '#ddd',
 				 backgroundColor: '#fff'
 	  },
-	  series: [{
-				name: 'TCP',
-				data: [<?php echo implode(',', $tcp);?>]
-			},{
-				name: 'UDP',
-				data: [<?php echo implode(',', $udp);?>]
-			},{
-				name: 'ICMP',
-				data: [<?php echo implode(',', $icmp);?>]
-			}]
+	  series: [<?php foreach($proto as $key=>$value):?>
+			{
+				name: "<?php echo $key;?>",
+				data: [<?php echo implode(',', $value);?>]
+			},<?php endforeach;?>]
    });
-   
+ 
 //signature graph
 pie = new Highcharts.Chart({
 	  chart: {
@@ -428,7 +366,7 @@ pie = new Highcharts.Chart({
 	  }]
    });
 
-
+ 
 //source graph
 chart = new Highcharts.Chart({
   chart: {
@@ -479,7 +417,7 @@ enabled: false
 	 ]
   }]
 });
-
+ 
 //destination graph
 chart = new Highcharts.Chart({
 	  chart: {

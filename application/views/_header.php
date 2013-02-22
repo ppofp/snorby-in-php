@@ -9,8 +9,9 @@
 		<script type="text/javascript" src="/js/jqueryallinone.js"></script>
 		<script type="text/javascript" src="/js/snorby.js"></script>
 		<link href="/css/snorby.css" media="all" rel="stylesheet" type="text/css" />
+		<link href="/css/jquery-ui-1.10.0.custom.min.css" media="all" rel="stylesheet" type="text/css" />
 		
-				<style type="text/css">
+		<style type="text/css">
         ul.table li div.small span.severity.sev1,
         span.severity.sev1{
 					background-color: #eb0000;
@@ -53,11 +54,11 @@
 				<div id="menu">
 					<ul class='container_12'>
 						<li class='item blank first'></li>
-						<li class='item'><a href="/dashboard">Dashboard</a></li>
-						<li class='item'><a href="/events/queue">My Queue (<span class='queue-count'>27</span>)</a></liü>
+						<li class='item'><a href="<?php echo site_url('dashboard');?>">Dashboard</a></li>
+						<li class='item'><a href="<?php echo 'events/queue';?>">My Queue (<span class='queue-count'>27</span>)</a></liü>
 						<li class='item'><a href="/events">Events</a></li>
 						<li class='item'><a href="/sensors">Sensors</a></li>
-						<li class='item'><a href="/search">Search</a></li>
+						<li class='item'><a href="<?php echo site_url('search');?>">Search</a></li>
 						<li class='item blank last'></li>
 						<li class='administration right'><a href="/settings">Administration</a></li>
 						<dl id="admin-menu" style='display:none;'>

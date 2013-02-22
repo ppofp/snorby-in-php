@@ -1,7 +1,7 @@
-		<div id="footer" class="container_12">
-			<div id="footer-inside" class="round">
-				Demon 1.0 - <a href="http://lihaibo.sinaapp.com">lihaibo</a> © 2013 东岳轩宇作品
-			</div>
-		</div>
+	<div id="footer">
+      <div class="container">
+        <p class="muted credit">Demon 1.0 By <a target="_blank" href="http://lihaibo.sinaapp.com">lihaibo</a> © 2013 东岳轩宇作品.</p>
+      </div>
+    </div>
 	</body>
 </html>

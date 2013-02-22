@@ -1,19 +1,25 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 	/**
-	*ÓÃ»§ÖÐÐÄ
+	*ç”¨æˆ·ä¸­å¿ƒ
 	*@Author:LiHaibo_ISLee
 	*@Time:2013/1/15
 	*/
 class Users extends CI_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->helper('url');
+	}
+
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		redirect(site_url('user/login'));
 	}
 	
 	/**
-	*µÇÂ¼Ò³ ºÍ µÇÂ¼ÐÅÏ¢µÄÌá½»´¦ÀíÒ³
+	*ç™»å½•é¡µ å’Œ ç™»å½•ä¿¡æ¯çš„æäº¤å¤„ç†é¡µ
 	*/
 	public function login()
 	{
@@ -23,38 +29,54 @@ class Users extends CI_Controller {
 		$data = Array();
 		$data['error_message'] = "";
 		
-		$this->load->helper('url');
 		
-		//ÓÃ»§µÚÒ»´Îµ½±¾Ò³Ãæ
+		//ç”¨æˆ·ç¬¬ä¸€æ¬¡åˆ°æœ¬é¡µé¢
 		if( empty($user) )
 		{
 			$this->load->view('users/login', $data);
 		}
 		
-		//´¦ÀíÓÃ»§Ìá½»µÄµÇÂ¼ÐÅÏ¢
+		//å¤„ç†ç”¨æˆ·æäº¤çš„ç™»å½•ä¿¡æ¯
 		else
 		{
 			$this->load->model('users_model');
 			$validation = $this->users_model->validate_user($user, $pwd);
 			
-			//³É¹¦µÇÂ¼
+			//æˆåŠŸç™»å½•
 			if( $validation )
 			{
 				$user_info = $this->users_model->get_user_info($user);
 				
-				//ÉèÖÃsession
+				//è®¾ç½®session
 				$this->session->set_userdata('user_info', $user_info);
-				$this->session->set_userdata('login', "true");
+				$this->session->set_userdata('login', true);
 				
 				redirect(site_url('home'));
 			}
 			
-			//ÃÜÂë»òÕßÓÃ»§Ãû²»ÕýÈ·
+			//å¯†ç æˆ–è€…ç”¨æˆ·åä¸æ­£ç¡®
 			else
 			{
-					$data['error_message'] = "ÃÜÂë»òÕßÓÃ»§Ãû´íÎó£¡";
-					$this->load->view('users/login', $data);
+				$data['error_message'] = "å¯†ç æˆ–è€…ç”¨æˆ·åé”™è¯¯ï¼";
+				$this->load->view('users/login', $data);
 			}
 		}
+	}
+	
+	/**
+	*ç™»å‡º
+	*/
+	public function logout()
+	{
+		$this->session->sess_destroy();
+		redirect(site_url('users/login'));
+	}
+	
+	/**
+	*404
+	*/
+	public function notfound()
+	{
+		$this->load->view('404');
 	}
 }

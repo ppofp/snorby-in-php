@@ -1,42 +1,61 @@
-<!-- Demon - Version: 1.0 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>登陆</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<html class='login'>
-	<head>
-		<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-		<title>Snorby - Please log in to continue...</title>
-		<link href="<?php echo base_url('css/login.css');?>" media="all" rel="stylesheet" type="text/css" />
-		<script src="<?php echo base_url('js/login.js');?>" type="text/javascript"></script>
-	</head>
-  
-	<body class='login'>
-		<div id="login">
-			<div id="wrapper">
-				<div id="content">
-					<div id="title">
-						<div class="grid" id="title-header">Please log in to continue...</div>
-					</div>
-					
-					<div id="signin">
-						<form accept-charset="UTF-8" action="<?php echo site_url(); ?>/users/login" class="validate" id="user_new" method="post">	
-							<p>
-								<label for="user_email">Email</label>
-								<br />
-								<input autocomplete="off" class="required email" id="user_email" name="user[email]" placeholder="example@example.com" size="30" type="text" value="" />
-							</p>
+    <!-- Le styles -->
+    <link href="<?php echo base_url('public/css/bootstrap.css');?>" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+      }
 
-							<p>
-								<label for="user_password">Password</label>
-								<br />
-								<input autocomplete="off" class="required password" id="user_password" name="user[password]" placeholder="P@ssw0rd" size="30" type="password" />
-							</p>
-							
-							<div id="form-actions">
-								<button class="success default"><span>登录</span></button>
-							</div>
-						</form>	
-					</div>
-				</div>
-			</div>
-		</div>
-	</body> 
-</html> 
+      .form-signin {
+        max-width: 300px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+      .form-signin input[type="text"],
+      .form-signin input[type="password"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+      }
+
+    </style>
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <form class="form-signin" action="<?php echo site_url('users/login'); ?>" method="post">
+        <h2 class="form-signin-heading">Demon 1.0</h2>
+        <input type="text" name="user" class="input-block-level" placeholder="Username">
+        <input type="password" name="password" class="input-block-level" placeholder="Password">
+        <button class="btn btn-large btn-primary" type="submit">登陆</button>
+      </form>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>

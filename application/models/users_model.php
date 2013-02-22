@@ -1,25 +1,49 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 	/**
-	*用户模型
+	*鐢ㄦ埛妯″瀷
 	*@Author:LiHaibo_ISLee
 	*@Time:2013/1/15
 	*/
 class Users_model extends CI_Model {
 	
 	/**
-	*验证用户用户名和密码是否正确
+	*楠岃瘉鐢ㄦ埛鐢ㄦ埛鍚嶅拰瀵嗙爜鏄惁姝ｇ‘
 	*/
 	public function validate_user($user, $pwd)
-	{
-		return true;
+	{	
+		$sql = "SELECT * FROM `users` WHERE name=? AND password=?";
+		$query = $this->db->query($sql, array($user, md5($pwd)));
+		
+		return ($query->num_rows() > 0);
 	}
 	
 	/**
-	*获取用户信息
+	*鑾峰彇鐢ㄦ埛淇℃伅
 	*/
 	public function get_user_info($user)
 	{
-		return Array('name'=>'ADMIN');
+		$sql = 'SELECT * FROM `users` WHERE name=?';
+		$query = $this->db->query($sql, array($user));
+		
+		if($query->num_rows() > 0 )
+		{
+			return $query->row_array();
+		}
+		else
+		{
+			return array();
+		}
+	}
+	
+	/**
+	 * update user's password
+	 * @param string $user username 
+	 * @param string $pwd new password
+	 */
+	public function update_pwd($user, $pwd)
+	{
+		$sql = 'UPDATE `users` SET password=? WHERE name=?';
+		$this->db->query($sql, array(md5($pwd),$user));
 	}
 }

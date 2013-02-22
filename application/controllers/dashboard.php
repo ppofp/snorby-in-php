@@ -1,15 +1,15 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 	/**
-	*ÒÇ±íÅÌ£¬ÏÔÊ¾Í³¼ÆÐÅÏ¢µÈ
+	*ä»ªè¡¨ç›˜ï¼Œæ˜¾ç¤ºç»Ÿè®¡ä¿¡æ¯ç­‰
 	*@Author:LiHaibo_ISLee
 	*@Time:2013/1/15
 	*/
 class Dashboard extends CI_Controller {
 
 	/**
-	*¹¹Ôìº¯Êý
-	*Éí·ÝÑéÖ¤
+	*æž„é€ å‡½æ•°
+	*èº«ä»½éªŒè¯
 	*/
 	public function __construct()
 	{
@@ -24,47 +24,31 @@ class Dashboard extends CI_Controller {
 	}
 	
 	/**
-	*ÒÇ±íÅÌµÄÊ×Ò³
+	*ä»ªè¡¨ç›˜çš„é¦–é¡µ
 	*/
 	public function index()
 	{
 		//$this->output->cache(1);
-		$ran = $this->input->get('range');
-		$range = $ran ? strtolower($ran) : "last_24";
+
 		
 		$data = Array();
 		
-		$data['range'] = $range;
+		$params = $this->input->post('params');
 		
 		$this->load->model('cache_model');
-		
-		//protocol
-		$data['tcp'] = $this->cache_model->get_protocol_count("tcp", $range);
-		$data['udp'] = $this->cache_model->get_protocol_count("udp", $range);
-		$data['icmp'] = $this->cache_model->get_protocol_count("icmp", $range);
-		
-		//severity
-		$data['high'] = $this->cache_model->get_severity_count('high', $range);
-		$data['medium'] = $this->cache_model->get_severity_count('medium', $range);
-		$data['low'] = $this->cache_model->get_severity_count('low', $range);
-		$data['event_count'] = array_sum($data['high']) + array_sum($data['medium']) + array_sum($data['low']); 
-		
-		//sensor metrics
-		$data['sensor_metrics'] = $this->cache_model->get_sensor_metrics($range);
-		
-		//src metrics
-		$data['src_metrics'] = $this->cache_model->get_src_metrics($range);
-		
-		//dst metrics
-		$data['dst_metrics'] = $this->cache_model->get_dst_metrics($range);
-		
-		//signature metrics
-		$data['signature_metrics'] = $this->cache_model->get_sig_metrics($range);
-		
-		$data['axis'] = $this->cache_model->get_axis($range);
-		
-		$this->load->view('_header', $data);
+		$this->load->model('sig_model');
+		$this->load->model('sensors_model');
+		$data = $this->cache_model->get_statistic_graph($params);
+		$data['signatures'] = $this->sig_model->get_sigs_name_id();
+		$data['sensors'] = $this->sensors_model->get_all_sensors();
+		$data['params'] = $params;
+		$data['type'] = 'graph';
+		$data['page'] = 'dashboard';
+		$this->load->view('header', $data);
+		$this->load->view('search_options');
+		///var_dump($data);
 		$this->load->view('dashboard/dashboard');
+		$this->load->view('dashboard/ipmap');
 		$this->load->view('_footer');
 	}
 }

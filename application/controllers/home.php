@@ -1,15 +1,15 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 	/**
-	*Ê×Ò³
+	*é¦–é¡µ
 	*@Author:LiHaibo_ISLee
 	*@Time:2013/1/15
 	*/
 class Home extends CI_Controller {
 
 	/**
-	*¹¹Ôìº¯Êý
-	*Éí·ÝÑéÖ¤
+	*æž„é€ å‡½æ•°
+	*èº«ä»½éªŒè¯
 	*/
 	public function __construct()
 	{
